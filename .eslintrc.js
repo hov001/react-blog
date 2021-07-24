@@ -15,6 +15,16 @@ module.exports = {
   rules: {
     'no-console': ['warn'],
     semi: ['off'],
-    quotes: ['error', 'single'],
+    quotes: ['off'],
+    'jsx-a11y/anchor-is-valid': [
+      'off',
+      {
+        components: ['Link'],
+        specialLink: ['hrefLeft', 'hrefRight'],
+        aspects: ['noHref', 'invalidHref', 'preferButton'],
+      },
+    ],
+    'react/jsx-one-expression-per-line': ['off'],
+    'react/jsx-curly-brace-presence': ['off'],
   },
 }
