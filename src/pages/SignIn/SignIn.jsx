@@ -1,7 +1,6 @@
 import React from 'react'
 // Class names
 import classNames from 'classnames'
-
 // Material UI
 import {
   Button,
@@ -12,14 +11,14 @@ import {
   Grid,
   Container,
 } from '@material-ui/core/'
-// Icons
+// Material Icons
 import { LockOutlined } from '@material-ui/icons/'
+// Material custom style
+import signInStyle from '../../helpers/materialStyles/signIn.style'
 // Components
 import AvatarSection from '../../components/Avatar/AvatarSection'
 import TypographySection from '../../components/Typography/TypographySection'
 import InputField from '../../components/InputField/InputField'
-// Material custom style
-import signInStyle from '../../helpers/materialStyles/signIn.style'
 
 function SignIn() {
   const signInClasses = signInStyle()
