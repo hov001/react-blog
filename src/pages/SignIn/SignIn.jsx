@@ -19,6 +19,7 @@ import signInStyle from '../../helpers/materialStyles/signIn.style'
 import AvatarSection from '../../components/Avatar/AvatarSection'
 import TypographySection from '../../components/Typography/TypographySection'
 import InputField from '../../components/InputField/InputField'
+import FormWrapper from '../../components/FormWrapper/FormWrapper'
 
 function SignIn() {
   const signInClasses = signInStyle()
@@ -33,7 +34,7 @@ function SignIn() {
         />
         <TypographySection text={'Sign in'} component={'h1'} variant={'h5'} />
 
-        <form className={signInClasses.form} noValidate>
+        <FormWrapper classnames={signInClasses.form} noValidate>
           <InputField
             variant={'outlined'}
             margin={'normal'}
@@ -74,7 +75,7 @@ function SignIn() {
               </Link>
             </Grid>
           </Grid>
-        </form>
+        </FormWrapper>
       </div>
     </Container>
   )
