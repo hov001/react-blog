@@ -26,5 +26,7 @@ module.exports = {
     ],
     'react/jsx-one-expression-per-line': ['off'],
     'react/jsx-curly-brace-presence': ['off'],
+    'react/require-default-props': ['off'],
+    'react/forbid-prop-types': ['off'],
   },
 }
