@@ -29,8 +29,8 @@ class SignUp extends React.Component {
     this.closeResponse = this.closeResponse.bind(this)
   }
 
-  handleRequest(vals) {
-    signUpWithEmailPassword(vals)
+  handleRequest(values) {
+    signUpWithEmailPassword(values)
       .then(() => {
         this.setState({
           alreadyUse: false,
