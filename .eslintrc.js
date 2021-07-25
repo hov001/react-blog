@@ -32,5 +32,8 @@ module.exports = {
     'spaced-comment': ['warn'],
     'react/prefer-stateless-function': ['off'],
     'class-methods-use-this': ['off'],
+    'import/order': ['off'],
+    'import/first': ['off'],
+    'import/last': ['off'],
   },
 }
