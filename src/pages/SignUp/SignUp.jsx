@@ -10,9 +10,9 @@ import {
   Link,
   Grid,
   Container,
-} from '@material-ui/core/'
+} from '@material-ui/core'
 // Material Icons
-import { LockOutlined } from '@material-ui/icons/'
+import { LockOutlined } from '@material-ui/icons'
 // Material custom style
 import signInStyle from '../../helpers/materialStyles/signIn.style'
 // Components
@@ -20,8 +20,40 @@ import AvatarSection from '../../components/Avatar/AvatarSection'
 import TypographySection from '../../components/Typography/TypographySection'
 import InputField from '../../components/InputField/InputField'
 import FormWrapper from '../../components/FormWrapper/FormWrapper'
+// eslint-disable-next-line import/order
+import firebaseConfig from '../../constants/firebase.config'
+import firebase from 'firebase/app'
+import 'firebase/auth'
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig)
+
+function signUpWithEmailPassword(e) {
+  e.preventDefault()
+  const email = 'test@example.com'
+  const password = 'hunter2'
+  // [START auth_signup_password]
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      console.log(userCredential.user)
+    })
+    .catch((error) => {
+      const errorCode = error.code
+      const errorMessage = error.message
+      // ..
+      console.log('errorCode', errorCode)
+      console.log('errorMessage', errorMessage)
+    })
+  // [END auth_signup_password]
+}
 
 function SignUp() {
+  // constructor(props) {
+  //   super(props)
+  //   // this.signUpWithEmailPassword = this.signUpWithEmailPassword.bind(this)
+  // }
+
   const signUpClasses = signInStyle()
 
   return (
@@ -34,7 +66,11 @@ function SignUp() {
         />
         <TypographySection text={'Sign up'} component={'h1'} variant={'h5'} />
 
-        <FormWrapper classnames={signUpClasses.form} noValidate>
+        <FormWrapper
+          classnames={signUpClasses.form}
+          onSubmit={signUpWithEmailPassword}
+          noValidate
+        >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <InputField

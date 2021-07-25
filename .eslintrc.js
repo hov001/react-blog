@@ -30,5 +30,7 @@ module.exports = {
     'react/forbid-prop-types': ['off'],
     'no-unused-vars': ['warn'],
     'spaced-comment': ['warn'],
+    'react/prefer-stateless-function': ['off'],
+    'class-methods-use-this': ['off'],
   },
 }
