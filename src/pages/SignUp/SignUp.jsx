@@ -1,10 +1,6 @@
 import React from 'react'
-// Firebase config
-import firebaseConfig from '../../constants/firebase.config'
-import firebase from 'firebase/app'
-import 'firebase/auth'
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig)
+// Prop types
+import PropsTypes from 'prop-types'
 // Class names
 import classNames from 'classnames'
 // Material UI
@@ -26,38 +22,50 @@ import AvatarSection from '../../components/Avatar/AvatarSection'
 import TypographySection from '../../components/Typography/TypographySection'
 import InputField from '../../components/InputField/InputField'
 import FormWrapper from '../../components/FormWrapper/FormWrapper'
+import signUpWithEmailPassword from '../../services/signUpWithEmailPass'
+import CustomizedSnackbars from '../../components/Alert/Alert'
 
 class SignUp extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
-    this.signUpWithEmailPassword = this.signUpWithEmailPassword.bind(this)
+    this.state = {
+      hasResponse: false,
+      alreadyUse: false,
+      useMessage: '',
+    }
+    this.signUpWithEmailPassword = signUpWithEmailPassword.bind(this)
+    this.handleRequest = this.handleRequest.bind(this)
+    this.closeResponse = this.closeResponse.bind(this)
   }
 
-  signUpWithEmailPassword(e) {
+  handleRequest(e) {
     e.preventDefault()
-    // console.log(e)
-    const email = 'test@example.com'
-    const password = 'hunter2'
-    // [START auth_signup_password]
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        console.log(userCredential.user)
+    console.log(e.target)
+    this.signUpWithEmailPassword()
+      .then(() => {
+        this.setState({
+          alreadyUse: false,
+          useMessage: 'You have successfully registered.',
+          hasResponse: true,
+        })
       })
       .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        // ..
-        console.log('errorCode', errorCode)
-        console.log('errorMessage', errorMessage)
+        this.setState({
+          alreadyUse: true,
+          useMessage: error.message,
+          hasResponse: true,
+        })
       })
-    // [END auth_signup_password]
+  }
+
+  closeResponse() {
+    this.setState({ hasResponse: false })
   }
 
   render() {
-    const signUpClasses = this.props.classes
+    const { classes } = this.props
+    const { hasResponse, alreadyUse, useMessage } = this.state
+    const signUpClasses = classes
 
     return (
       <Container component="main" maxWidth="xs">
@@ -68,10 +76,9 @@ class SignUp extends React.Component {
             icon={<LockOutlined />}
           />
           <TypographySection text={'Sign up'} component={'h1'} variant={'h5'} />
-
           <FormWrapper
             classnames={signUpClasses.form}
-            onSubmit={this.signUpWithEmailPassword}
+            onSubmit={this.handleRequest}
             noValidate
           >
             <Grid container spacing={2}>
@@ -123,14 +130,6 @@ class SignUp extends React.Component {
                   name={'password'}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
             </Grid>
             <Button
               type="submit"
@@ -149,10 +148,20 @@ class SignUp extends React.Component {
               </Grid>
             </Grid>
           </FormWrapper>
+          <CustomizedSnackbars
+            isOpen={hasResponse}
+            closingFunc={this.closeResponse}
+            message={useMessage}
+            alreadyUse={alreadyUse}
+          />
         </div>
       </Container>
     )
   }
+}
+
+SignUp.propTypes = {
+  classes: PropsTypes.object,
 }
 
 export default () => {
