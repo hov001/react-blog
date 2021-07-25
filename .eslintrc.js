@@ -28,5 +28,7 @@ module.exports = {
     'react/jsx-curly-brace-presence': ['off'],
     'react/require-default-props': ['off'],
     'react/forbid-prop-types': ['off'],
+    'no-unused-vars': ['warn'],
+    'spaced-comment': ['warn'],
   },
 }
