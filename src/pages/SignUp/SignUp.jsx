@@ -4,15 +4,7 @@ import PropsTypes from 'prop-types'
 // Class names
 import classNames from 'classnames'
 // Material UI
-import {
-  Button,
-  CssBaseline,
-  FormControlLabel,
-  Checkbox,
-  Link,
-  Grid,
-  Container,
-} from '@material-ui/core'
+import { CssBaseline, Container, Grid, Link } from '@material-ui/core'
 // Material Icons
 import { LockOutlined } from '@material-ui/icons'
 // Material custom style
@@ -20,10 +12,10 @@ import signInStyle from '../../helpers/materialStyles/signIn.style'
 // Components
 import AvatarSection from '../../components/Avatar/AvatarSection'
 import TypographySection from '../../components/Typography/TypographySection'
-import InputField from '../../components/InputField/InputField'
-import FormWrapper from '../../components/FormWrapper/FormWrapper'
 import signUpWithEmailPassword from '../../services/signUpWithEmailPass'
 import CustomizedSnackbars from '../../components/Alert/Alert'
+// Sign up form
+import SignUpForm from './SignUp.formik'
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -33,15 +25,12 @@ class SignUp extends React.Component {
       alreadyUse: false,
       useMessage: '',
     }
-    this.signUpWithEmailPassword = signUpWithEmailPassword.bind(this)
     this.handleRequest = this.handleRequest.bind(this)
     this.closeResponse = this.closeResponse.bind(this)
   }
 
-  handleRequest(e) {
-    e.preventDefault()
-    console.log(e.target)
-    this.signUpWithEmailPassword()
+  handleRequest(vals) {
+    signUpWithEmailPassword(vals)
       .then(() => {
         this.setState({
           alreadyUse: false,
@@ -76,78 +65,14 @@ class SignUp extends React.Component {
             icon={<LockOutlined />}
           />
           <TypographySection text={'Sign up'} component={'h1'} variant={'h5'} />
-          <FormWrapper
-            classnames={signUpClasses.form}
-            onSubmit={this.handleRequest}
-            noValidate
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <InputField
-                  variant={'outlined'}
-                  margin={'normal'}
-                  required
-                  fullWidth
-                  type={'text'}
-                  id={'firstName'}
-                  label={'First Name'}
-                  name={'firstName'}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <InputField
-                  variant={'outlined'}
-                  margin={'normal'}
-                  required
-                  fullWidth
-                  type={'text'}
-                  id={'lastName'}
-                  label={'Last Name'}
-                  name={'lastName'}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <InputField
-                  variant={'outlined'}
-                  margin={'normal'}
-                  required
-                  fullWidth
-                  type={'email'}
-                  id={'email'}
-                  label={'Email Address'}
-                  name={'email'}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <InputField
-                  variant={'outlined'}
-                  margin={'normal'}
-                  required
-                  fullWidth
-                  type={'password'}
-                  id={'password'}
-                  label={'Password'}
-                  name={'password'}
-                />
-              </Grid>
+          <SignUpForm handleRequest={this.handleRequest} />
+          <Grid container>
+            <Grid item>
+              <Link href="#" variant="body2">
+                {'Already have an account? Sign in'}
+              </Link>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={signUpClasses.submit}
-            >
-              Sign Up
-            </Button>
-            <Grid container>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {'Already have an account? Sign in'}
-                </Link>
-              </Grid>
-            </Grid>
-          </FormWrapper>
+          </Grid>
           <CustomizedSnackbars
             isOpen={hasResponse}
             closingFunc={this.closeResponse}

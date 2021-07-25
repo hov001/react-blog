@@ -5,9 +5,7 @@ import 'firebase/auth'
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
 
-function signUpWithEmailPassword() {
-  const email = 'test@example.com'
-  const password = 'hunter2'
+function signUpWithEmailPassword({ firsName, lastName, email, password }) {
   return firebase.auth().createUserWithEmailAndPassword(email, password)
 }
 
