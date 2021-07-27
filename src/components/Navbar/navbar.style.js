@@ -6,7 +6,8 @@ const navbarStyle = makeStyles((theme) => ({
     alignItems: 'center',
   },
   signInBtn: {
-    color: 'white',
+    color: '#fff',
+    textDecoration: 'none',
   },
 }))
 

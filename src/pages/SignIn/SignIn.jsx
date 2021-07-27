@@ -1,20 +1,16 @@
 import React from 'react'
-// Class names
+import { Link } from 'react-router-dom'
 import classNames from 'classnames'
-// Material UI
 import {
   Button,
   CssBaseline,
   FormControlLabel,
   Checkbox,
-  Link,
   Grid,
   Container,
-} from '@material-ui/core/'
-// Material Icons
-import { LockOutlined } from '@material-ui/icons/'
-// Material custom style
-import signInStyle from '../../helpers/materialStyles/signIn.style'
+} from '@material-ui/core'
+import { LockOutlined } from '@material-ui/icons'
+import signInStyle from './signIn.style'
 // Components
 import AvatarSection from '../../components/Avatar/AvatarSection'
 import TypographySection from '../../components/Typography/TypographySection'
@@ -70,8 +66,8 @@ function SignIn() {
           </Button>
           <Grid container>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
+              <Link to="/sign-up" className={signInClasses.link}>
+                Don&apos;t have an account? Sign Up
               </Link>
             </Grid>
           </Grid>

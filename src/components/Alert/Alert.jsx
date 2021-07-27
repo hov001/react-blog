@@ -2,7 +2,7 @@ import React from 'react'
 import PropsTypes from 'prop-types'
 import Snackbar from '@material-ui/core/Snackbar'
 import MuiAlert from '@material-ui/lab/Alert'
-import alertStyle from '../../helpers/materialStyles/alert.style'
+import alertStyle from './alert.style'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />

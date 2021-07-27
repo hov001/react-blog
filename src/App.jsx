@@ -1,14 +1,15 @@
 import React from 'react'
-import SignIn from './pages/SignIn/SignIn'
-import SignUp from './pages/SignUp/SignUp'
+import { BrowserRouter as Router } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
+import Main from './components/Main/Main'
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
-      {/*<SignIn />*/}
-      <SignUp />
+      <Router>
+        <Navbar />
+        <Main />
+      </Router>
     </div>
   )
 }

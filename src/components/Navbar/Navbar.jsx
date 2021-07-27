@@ -1,21 +1,14 @@
 import React from 'react'
-import {
-  AppBar,
-  Breadcrumbs,
-  Button,
-  ButtonGroup,
-  Grid,
-  Toolbar,
-  Link,
-} from '@material-ui/core'
+import { Link } from 'react-router-dom'
+import { AppBar, Button, ButtonGroup, Grid, Toolbar } from '@material-ui/core'
 import TypographySection from '../Typography/TypographySection'
-import navbarStyle from '../../helpers/materialStyles/navbar.style'
+import navbarStyle from './navbar.style'
 
 function Navbar() {
   const classes = navbarStyle()
 
   return (
-    <AppBar position="static">
+    <AppBar color={'secondary'} position="static">
       <Toolbar>
         <Grid container>
           <Grid item xs={3}>
@@ -31,18 +24,24 @@ function Navbar() {
               color="inherit"
               aria-label="text inherit button group"
             >
-              <Button color="inherit">Add blog</Button>
+              <Button color="inherit">
+                <Link className={classes.signInBtn} to="/">
+                  Add blog
+                </Link>
+              </Button>
             </ButtonGroup>
           </Grid>
           <Grid item className={classes.signIn}>
-            <Breadcrumbs aria-label="breadcrumb" className={classes.signInBtn}>
-              <Link color="inherit" href="/">
+            <Button color="inherit">
+              <Link className={classes.signInBtn} to="/sign-in">
                 Sign In
               </Link>
-              <Link color="inherit" href="/">
+            </Button>
+            <Button color="inherit">
+              <Link className={classes.signInBtn} to="/sign-up">
                 Sign Up
               </Link>
-            </Breadcrumbs>
+            </Button>
           </Grid>
         </Grid>
       </Toolbar>

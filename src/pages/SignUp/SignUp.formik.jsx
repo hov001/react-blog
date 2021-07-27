@@ -6,7 +6,7 @@ import PropsTypes from 'prop-types'
 import { Button, Grid } from '@material-ui/core'
 import InputField from '../../components/InputField/InputField'
 import FormWrapper from '../../components/FormWrapper/FormWrapper'
-import signInStyle from '../../helpers/materialStyles/signIn.style'
+import signInStyle from '../SignIn/signIn.style'
 
 function SignUpForm({ classes, formik }) {
   const signUpClasses = classes

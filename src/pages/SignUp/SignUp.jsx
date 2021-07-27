@@ -1,20 +1,14 @@
 import React from 'react'
-// Prop types
+import { Link } from 'react-router-dom'
 import PropsTypes from 'prop-types'
-// Class names
 import classNames from 'classnames'
-// Material UI
-import { CssBaseline, Container, Grid, Link } from '@material-ui/core'
-// Material Icons
+import { CssBaseline, Container, Grid } from '@material-ui/core'
 import { LockOutlined } from '@material-ui/icons'
-// Material custom style
-import signInStyle from '../../helpers/materialStyles/signIn.style'
-// Components
+import signInStyle from '../SignIn/signIn.style'
 import AvatarSection from '../../components/Avatar/AvatarSection'
 import TypographySection from '../../components/Typography/TypographySection'
 import signUpWithEmailPassword from '../../services/signUpWithEmailPass'
 import CustomizedSnackbars from '../../components/Alert/Alert'
-// Sign up form
 import SignUpForm from './SignUp.formik'
 
 class SignUp extends React.Component {
@@ -68,8 +62,8 @@ class SignUp extends React.Component {
           <SignUpForm handleRequest={this.handleRequest} />
           <Grid container>
             <Grid item>
-              <Link href="#" variant="body2">
-                {'Already have an account? Sign in'}
+              <Link to="/sign-in" className={signUpClasses.link}>
+                Already have an account? Sign in
               </Link>
             </Grid>
           </Grid>
