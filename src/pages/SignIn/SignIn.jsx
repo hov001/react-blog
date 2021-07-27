@@ -1,69 +1,67 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropsTypes from 'prop-types'
 import classNames from 'classnames'
-import {
-  Button,
-  CssBaseline,
-  FormControlLabel,
-  Checkbox,
-  Grid,
-  Container,
-} from '@material-ui/core'
+import { CssBaseline, Grid, Container } from '@material-ui/core'
 import { LockOutlined } from '@material-ui/icons'
 import signInStyle from './signIn.style'
-// Components
 import AvatarSection from '../../components/Avatar/AvatarSection'
 import TypographySection from '../../components/Typography/TypographySection'
-import InputField from '../../components/InputField/InputField'
-import FormWrapper from '../../components/FormWrapper/FormWrapper'
+import signInWithEmailPassword from '../../services/signInWithEmailPass'
+import CustomizedSnackbars from '../../components/Alert/Alert'
+import SignInForm from './SignIn.formik'
 
-function SignIn() {
-  const signInClasses = signInStyle()
+class SignIn extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      hasResponse: false,
+      alreadyUse: false,
+      useMessage: '',
+    }
+    this.handleRequest = this.handleRequest.bind(this)
+    this.closeResponse = this.closeResponse.bind(this)
+  }
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={signInClasses.paper}>
-        <AvatarSection
-          classNames={classNames(signInClasses.avatar)}
-          icon={<LockOutlined />}
-        />
-        <TypographySection text={'Sign in'} component={'h1'} variant={'h5'} />
+  handleRequest(values) {
+    signInWithEmailPassword(values)
+      .then(() => {
+        console.log(values)
+        this.setState({
+          alreadyUse: false,
+          useMessage: 'You have successfully log in.',
+          hasResponse: true,
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+        this.setState({
+          alreadyUse: true,
+          useMessage: error.message,
+          hasResponse: true,
+        })
+      })
+  }
 
-        <FormWrapper classnames={signInClasses.form} noValidate>
-          <InputField
-            variant={'outlined'}
-            margin={'normal'}
-            required
-            fullWidth
-            type={'email'}
-            id={'email'}
-            label={'Email Address'}
-            name={'email'}
+  closeResponse() {
+    this.setState({ hasResponse: false })
+  }
+
+  render() {
+    const { classes } = this.props
+    const { hasResponse, alreadyUse, useMessage } = this.state
+    const signInClasses = classes
+
+    return (
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={signInClasses.paper}>
+          <AvatarSection
+            classNames={classNames(signInClasses.avatar)}
+            icon={<LockOutlined />}
           />
-          <InputField
-            variant={'outlined'}
-            margin={'normal'}
-            required
-            fullWidth
-            type={'password'}
-            id={'password'}
-            label={'Password'}
-            name={'password'}
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={signInClasses.submit}
-          >
-            Sign In
-          </Button>
+          <TypographySection text={'Sign in'} component={'h1'} variant={'h5'} />
+          <SignInForm handleRequest={this.handleRequest} />
           <Grid container>
             <Grid item>
               <Link to="/sign-up" className={signInClasses.link}>
@@ -71,10 +69,23 @@ function SignIn() {
               </Link>
             </Grid>
           </Grid>
-        </FormWrapper>
-      </div>
-    </Container>
-  )
+          <CustomizedSnackbars
+            isOpen={hasResponse}
+            closingFunc={this.closeResponse}
+            message={useMessage}
+            alreadyUse={alreadyUse}
+          />
+        </div>
+      </Container>
+    )
+  }
 }
 
-export default SignIn
+SignIn.propTypes = {
+  classes: PropsTypes.object,
+}
+
+export default () => {
+  const classes = signInStyle()
+  return <SignIn classes={classes} />
+}
