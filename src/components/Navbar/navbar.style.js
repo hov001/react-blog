@@ -1,8 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles'
 
-const navbarStyle = makeStyles((theme) => ({
+const navbarStyle = makeStyles(() => ({
   signIn: {
     display: 'flex',
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   signInBtn: {
