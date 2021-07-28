@@ -39,6 +39,7 @@ class CustomizedSnackbars extends React.Component {
           severity={alreadyUse ? 'error' : 'success'}
         >
           {message}
+          {message}
         </Alert>
       </Snackbar>
     )
