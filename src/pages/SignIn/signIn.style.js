@@ -20,7 +20,7 @@ const signInStyle = makeStyles((theme) => ({
   },
   link: {
     textDecoration: 'none',
-    color: '#3f51b5',
+    color: '#004d40',
   },
 }))
 

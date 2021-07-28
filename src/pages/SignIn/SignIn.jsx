@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import PropsTypes from 'prop-types'
 import classNames from 'classnames'
 import { CssBaseline, Grid, Container } from '@material-ui/core'
@@ -24,17 +24,14 @@ class SignIn extends React.Component {
   }
 
   handleRequest(values) {
+    const { isAuth, history } = this.props
+
     signInWithEmailPassword(values)
-      .then(() => {
-        console.log(values)
-        this.setState({
-          alreadyUse: false,
-          useMessage: 'You have successfully log in.',
-          hasResponse: true,
-        })
+      .then((response) => {
+        isAuth(response.user.uid)
+        history()
       })
       .catch((error) => {
-        console.log(error)
         this.setState({
           alreadyUse: true,
           useMessage: error.message,
@@ -83,9 +80,19 @@ class SignIn extends React.Component {
 
 SignIn.propTypes = {
   classes: PropsTypes.object,
+  isAuth: PropsTypes.func,
+  history: PropsTypes.func,
 }
 
-export default () => {
+export default ({ isAuth, uid }) => {
   const classes = signInStyle()
-  return <SignIn classes={classes} />
+  const history = useHistory()
+  return (
+    <SignIn
+      classes={classes}
+      isAuth={isAuth}
+      history={() => history.push('/')}
+      uid={uid === null ? 'null' : uid}
+    />
+  )
 }

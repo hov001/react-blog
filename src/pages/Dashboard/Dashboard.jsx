@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import PropsTypes from 'prop-types'
 import DashboardForm from './Dashboard.formik'
 import { Container } from '@material-ui/core'
@@ -19,7 +20,6 @@ class Dashboard extends React.Component {
   }
 
   handleRequest(values) {
-    console.log(values)
     setPostData(values)
       .then(() => {
         this.setState({
@@ -42,7 +42,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, uid } = this.props
     const { hasResponse, alreadyUse, useMessage } = this.state
 
     return (
@@ -63,9 +63,13 @@ class Dashboard extends React.Component {
 
 Dashboard.propTypes = {
   classes: PropsTypes.object,
+  uid: PropsTypes.string,
 }
 
-export default () => {
+export default ({ status, isAuth, uid }) => {
   const classes = signInStyle()
-  return <Dashboard classes={classes} />
+  const history = useHistory()
+
+  if (uid === null) history.push('/')
+  return <Dashboard classes={classes} uid={uid} />
 }

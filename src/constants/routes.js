@@ -11,6 +11,7 @@ const routes = [
   },
   {
     path: '/dashboard',
+    status: 'private',
     component: Dashboard,
   },
   {
