@@ -8,25 +8,27 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      isAuthId: null,
+      isAuthId: window.localStorage.getItem('userId'),
+      firstName: window.localStorage.getItem('firstName'),
     }
 
     this.isAuth = this.isAuth.bind(this)
   }
 
-  isAuth(uid = null) {
+  isAuth(uid = null, firstName) {
     this.setState({
       isAuthId: uid,
+      firstName,
     })
   }
 
   render() {
-    const { isAuthId } = this.state
+    const { isAuthId, firstName } = this.state
 
     return (
       <div className="App">
         <Router>
-          <Navbar isAuth={this.isAuth} uid={isAuthId} />
+          <Navbar isAuth={this.isAuth} uid={isAuthId} name={firstName} />
           <Main isAuth={this.isAuth} uid={isAuthId} />
         </Router>
       </div>

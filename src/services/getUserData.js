@@ -11,7 +11,7 @@ function setUserData(userId) {
     .get()
     .then((snapshot) => {
       if (snapshot.exists()) {
-        return snapshot.val()
+        return { userId, ...snapshot.val() }
       } else {
         return 'No data available'
       }

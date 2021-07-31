@@ -1,5 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+import PropsTypes from 'prop-types'
 import routes from '../../constants/routes'
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
 
@@ -36,6 +37,11 @@ function Main({ isAuth, uid }) {
       })}
     </Switch>
   )
+}
+
+Main.propTypes = {
+  isAuth: PropsTypes.func,
+  uid: PropsTypes.string,
 }
 
 export default Main

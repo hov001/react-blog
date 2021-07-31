@@ -46,7 +46,14 @@ function SignInForm({ classes, formik }) {
         helperText={formik.touched.password && formik.errors.password}
       />
       <FormControlLabel
-        control={<Checkbox value="remember" color="primary" />}
+        control={
+          <Checkbox
+            color="primary"
+            name={'stayIn'}
+            value={formik.values.stayIn}
+            onChange={formik.handleChange}
+          />
+        }
         label="Remember me"
       />
       <Button
@@ -84,6 +91,7 @@ export default ({ handleRequest }) => {
     initialValues: {
       email: '',
       password: '',
+      stayIn: false,
     },
     validationSchema,
     onSubmit: (values) => {

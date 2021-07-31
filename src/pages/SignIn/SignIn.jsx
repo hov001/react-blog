@@ -10,6 +10,7 @@ import TypographySection from '../../components/Typography/TypographySection'
 import signInWithEmailPassword from '../../services/signInWithEmailPass'
 import CustomizedSnackbars from '../../components/Alert/Alert'
 import SignInForm from './SignIn.formik'
+import getUserData from '../../services/getUserData'
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -28,7 +29,15 @@ class SignIn extends React.Component {
 
     signInWithEmailPassword(values)
       .then((response) => {
-        isAuth(response.user.uid)
+        return getUserData(response.user.uid)
+      })
+      .then((response) => {
+        const { userId, firstName } = response
+        if (values.stayIn === true) {
+          window.localStorage.setItem('userId', userId)
+          window.localStorage.setItem('firstName', firstName)
+        }
+        isAuth(userId, firstName)
         history()
       })
       .catch((error) => {
