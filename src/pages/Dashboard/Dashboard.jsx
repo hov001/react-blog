@@ -66,10 +66,8 @@ Dashboard.propTypes = {
   uid: PropsTypes.string,
 }
 
-export default ({ status, isAuth, uid }) => {
+export default ({ uid }) => {
   const classes = signInStyle()
-  const history = useHistory()
-
-  if (uid === null) history.push('/')
+  console.log(uid)
   return <Dashboard classes={classes} uid={uid} />
 }
