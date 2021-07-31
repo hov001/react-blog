@@ -1,5 +1,4 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
 import PropsTypes from 'prop-types'
 import DashboardForm from './Dashboard.formik'
 import { Container } from '@material-ui/core'
@@ -48,7 +47,7 @@ class Dashboard extends React.Component {
     return (
       <Container component="main" maxWidth="sm">
         <div className={classes.paper}>
-          <DashboardForm handleRequest={this.handleRequest} />
+          <DashboardForm handleRequest={this.handleRequest} uid={uid} />
           <CustomizedSnackbars
             isOpen={hasResponse}
             closingFunc={this.closeResponse}
@@ -68,6 +67,6 @@ Dashboard.propTypes = {
 
 export default ({ uid }) => {
   const classes = signInStyle()
-  console.log(uid)
+
   return <Dashboard classes={classes} uid={uid} />
 }

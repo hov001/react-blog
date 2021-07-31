@@ -1,15 +1,12 @@
 import firebase from 'firebase/app'
 import 'firebase/database'
 
-function setPostData({ userId, postTitle, postText }) {
-  console.log(userId, postTitle, postText)
-  return firebase
-    .database()
-    .ref('posts/' + userId + '/' + 'ss')
-    .set({
-      postTitle,
-      postText,
-    })
+function setPostData({ userId, postId, postTitle, postText }) {
+  console.log(userId, postId, postTitle, postText)
+  return firebase.database().ref(`posts/${userId}/${postId}`).set({
+    postTitle,
+    postText,
+  })
 }
 
 export default setPostData

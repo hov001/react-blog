@@ -2,6 +2,7 @@
 import React from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
+import { v4 as uuidv4 } from 'uuid'
 import PropsTypes from 'prop-types'
 import { Button, Grid } from '@material-ui/core'
 import InputField from '../../components/InputField/InputField'
@@ -70,7 +71,7 @@ DashboardForm.propTypes = {
   formik: PropsTypes.object,
 }
 
-export default ({ handleRequest }) => {
+export default ({ handleRequest, uid }) => {
   const classes = signInStyle()
   const validationSchema = yup.object({
     postTitle: yup
@@ -86,8 +87,9 @@ export default ({ handleRequest }) => {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log(values)
-      handleRequest({ userId: 'ffff', ...values })
+      const postId = uuidv4()
+      console.log(values, postId)
+      handleRequest({ userId: uid, postId, ...values })
     },
   })
 

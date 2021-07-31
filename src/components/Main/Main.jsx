@@ -15,7 +15,7 @@ function Main({ isAuth, uid }) {
             isAuth={isAuth}
             uid={uid}
           >
-            <route.component routes={route.routes} />
+            <route.component routes={route.routes} uid={uid} />
           </PrivateRoute>
         ) : (
           <Route
