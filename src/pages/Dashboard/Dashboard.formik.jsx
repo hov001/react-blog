@@ -88,7 +88,6 @@ export default ({ handleRequest, uid }) => {
     validationSchema,
     onSubmit: (values) => {
       const postId = uuidv4()
-      console.log(values, postId)
       handleRequest({ userId: uid, postId, ...values })
     },
   })
