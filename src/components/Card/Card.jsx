@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
 })
 
-function PostCard({ styleClass }) {
+function PostCard({ styleClass, postTitle, postText, author, date }) {
   const classes = useStyles()
 
   return (
@@ -27,20 +27,22 @@ function PostCard({ styleClass }) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="https://firebasestorage.googleapis.com/v0/b/react-blog-b8c0a.appspot.com/o/logo-back-1.jpg?alt=media&token=7c12b4d3-9137-4783-9888-8d6285f8800d"
+          image="https://firebasestorage.googleapis.com/v0/b/react-blog-b8c0a.appspot.com/o/no-image.png?alt=media&token=c776860b-6ab7-46d6-ac84-f55af6960d92"
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+            {postTitle}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {postText}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
+      <CardActions display={'flex'} justifycontent={'space-between'}>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {date}
+        </Typography>
         <Button size="small" color="primary">
           Learn More
         </Button>
@@ -51,6 +53,10 @@ function PostCard({ styleClass }) {
 
 PostCard.propTypes = {
   styleClass: PropsTypes.string,
+  postTitle: PropsTypes.string,
+  postText: PropsTypes.string,
+  author: PropsTypes.string,
+  date: PropsTypes.string,
 }
 
 export default PostCard

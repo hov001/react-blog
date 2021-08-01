@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
 import Main from './components/Main/Main'
+import { CircularProgress } from '@material-ui/core'
 
 class App extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { isAuthId, firstName } = this.state
+    const { isLoaded, isAuthId, firstName } = this.state
 
     return (
       <div className="App">

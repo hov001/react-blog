@@ -86,9 +86,12 @@ export default ({ handleRequest, uid }) => {
       postText: '',
     },
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       const postId = uuidv4()
-      handleRequest({ userId: uid, postId, ...values })
+      const date = new Date().toLocaleString()
+      handleRequest({ userId: uid, postId, ...values, date })
+
+      resetForm()
     },
   })
 

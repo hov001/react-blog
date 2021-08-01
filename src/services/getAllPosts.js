@@ -2,16 +2,15 @@
 import firebase from 'firebase/app'
 import 'firebase/database'
 
-function getUserData(userId) {
+function getAllPosts() {
   return firebase
     .database()
     .ref()
-    .child('users')
-    .child(userId)
+    .child('posts')
     .get()
     .then((snapshot) => {
       if (snapshot.exists()) {
-        return { userId, ...snapshot.val() }
+        return snapshot.val()
       } else {
         return 'No data available'
       }
@@ -21,4 +20,4 @@ function getUserData(userId) {
     })
 }
 
-export default getUserData
+export default getAllPosts
