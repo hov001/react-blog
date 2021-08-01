@@ -32,15 +32,15 @@ class Home extends React.Component {
       <Container component="main" maxWidth="lg">
         <div className={homeClasses.paper}>
           {isLoaded ? (
-            posts.map((item) => {
+            posts.map(([postId, postInfos]) => {
               return (
                 <PostCard
                   styleClass={homeClasses.item}
-                  key={item[0]}
-                  postTitle={item[1].postTitle}
-                  postText={item[1].postText}
-                  author={item[1].userId}
-                  date={item[1].date}
+                  key={postId}
+                  postTitle={postInfos.postTitle}
+                  postText={postInfos.postText}
+                  author={postInfos.userId}
+                  date={postInfos.date}
                 />
               )
             })
