@@ -4,7 +4,6 @@ import PostCard from '../../components/Card/Card'
 import { CircularProgress, Container } from '@material-ui/core'
 import homeStyle from './home.style'
 import getAllPosts from '../../services/getAllPosts'
-import Main from '../../components/Main/Main'
 
 class Home extends React.Component {
   constructor(props) {
@@ -32,18 +31,17 @@ class Home extends React.Component {
       <Container component="main" maxWidth="lg">
         <div className={homeClasses.paper}>
           {isLoaded ? (
-            posts.map(([postId, postInfos]) => {
-              return (
-                <PostCard
-                  styleClass={homeClasses.item}
-                  key={postId}
-                  postTitle={postInfos.postTitle}
-                  postText={postInfos.postText}
-                  author={postInfos.userId}
-                  date={postInfos.date}
-                />
-              )
-            })
+            posts.map(([postId, postInfos]) => (
+              <PostCard
+                styleClass={homeClasses.item}
+                key={postId}
+                postId={postId}
+                postTitle={postInfos.postTitle}
+                postText={postInfos.postText}
+                author={postInfos.userId}
+                date={postInfos.date}
+              />
+            ))
           ) : (
             <CircularProgress />
           )}

@@ -2,6 +2,7 @@ import Home from '../pages/Home/Home'
 import SignUp from '../pages/SignUp/SignUp'
 import SignIn from '../pages/SignIn/SignIn'
 import Dashboard from '../pages/Dashboard/Dashboard'
+import SinglePage from '../pages/SinglePage/SinglePage'
 
 const routes = [
   {
@@ -21,6 +22,11 @@ const routes = [
   {
     path: '/sign-up',
     component: SignUp,
+  },
+  {
+    path: '/single-page/:id',
+    status: 'nested',
+    component: SinglePage,
   },
 ]
 

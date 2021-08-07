@@ -1,6 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import PropsTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
@@ -19,7 +20,15 @@ const useStyles = makeStyles({
   },
 })
 
-function PostCard({ styleClass, postTitle, postText, author, date }) {
+function PostCard({
+  styleClass,
+  key,
+  postId,
+  postTitle,
+  postText,
+  author,
+  date,
+}) {
   const classes = useStyles()
 
   return (
@@ -44,8 +53,9 @@ function PostCard({ styleClass, postTitle, postText, author, date }) {
           {date}
         </Typography>
         <Button size="small" color="primary">
-          Learn More
+          <Link to={`/single-page/${postId}`}>Learn More</Link>
         </Button>
+        <a href=""> </a>
       </CardActions>
     </Card>
   )
