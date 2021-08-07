@@ -2,7 +2,8 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import PropsTypes from 'prop-types'
 import getPostData from '../../services/getPostData'
-import { CircularProgress, Container } from '@material-ui/core'
+import { Button, CircularProgress, Container } from '@material-ui/core'
+import { Delete, Edit } from '@material-ui/icons'
 
 class SinglePage extends React.Component {
   constructor(props) {
@@ -22,12 +23,32 @@ class SinglePage extends React.Component {
   }
 
   render() {
+    const { uid } = this.props
     const { isLoaded, post } = this.state
+
     return (
       <Container component="main" maxWidth="lg">
         <div>
           {isLoaded ? (
             <div>
+              {post.userId === uid && (
+                <div>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<Edit />}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    startIcon={<Delete />}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              )}
               <h1>{post.postTitle}</h1>
               <p>{post.postText}</p>
               <span>{post.date}</span>
@@ -45,8 +66,8 @@ SinglePage.propTypes = {
   id: PropsTypes.string,
 }
 
-export default () => {
+export default ({ uid }) => {
   const { id } = useParams()
 
-  return <SinglePage id={id} />
+  return <SinglePage id={id} uid={uid} />
 }
