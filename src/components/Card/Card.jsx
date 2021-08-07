@@ -20,15 +20,7 @@ const useStyles = makeStyles({
   },
 })
 
-function PostCard({
-  styleClass,
-  key,
-  postId,
-  postTitle,
-  postText,
-  author,
-  date,
-}) {
+function PostCard({ styleClass, postId, postTitle, postText, author, date }) {
   const classes = useStyles()
 
   return (

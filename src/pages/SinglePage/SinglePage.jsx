@@ -1,24 +1,42 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import PropsTypes from 'prop-types'
+import getPostData from '../../services/getPostData'
+import { CircularProgress, Container } from '@material-ui/core'
 
 class SinglePage extends React.Component {
   constructor(props) {
     super(props)
-    const { id } = props
 
     this.state = {
-      uid: id,
+      isLoaded: false,
+      post: {},
     }
   }
 
-  render() {
-    const { uid } = this.state
+  componentDidMount() {
+    const { id } = this.props
+    getPostData(id).then((response) => {
+      return this.setState({ isLoaded: true, post: response })
+    })
+  }
 
+  render() {
+    const { isLoaded, post } = this.state
     return (
-      <div>
-        <h1>single-working {uid}</h1>
-      </div>
+      <Container component="main" maxWidth="lg">
+        <div>
+          {isLoaded ? (
+            <div>
+              <h1>{post.postTitle}</h1>
+              <p>{post.postText}</p>
+              <span>{post.date}</span>
+            </div>
+          ) : (
+            <CircularProgress />
+          )}
+        </div>
+      </Container>
     )
   }
 }

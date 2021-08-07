@@ -19,7 +19,11 @@ function Main({ isAuth, uid }) {
             <route.component routes={route.routes} uid={uid} />
           </PrivateRoute>
         ) : route.status === 'nested' ? (
-          <Route key={i} path={route.path} children={<route.component />} />
+          <Route
+            key={i}
+            path={route.path}
+            children={<route.component uid={uid} />}
+          />
         ) : (
           <Route
             key={i}
